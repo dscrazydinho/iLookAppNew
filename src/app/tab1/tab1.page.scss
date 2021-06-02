@@ -1,0 +1,65 @@
+ion-card {
+  margin: 0.1rem;
+
+  ion-card-header {
+    padding: 0.2rem;
+
+    ion-card-subtitle {
+      font-weight: none;
+      font-size: 0.8rem;
+    }
+
+    ion-card-title {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
+
+  ion-card-content {
+    padding: 0.2rem;
+  }
+}
+
+.noSearch {
+  ion-card-header {
+    padding: 0.2rem;
+
+    ion-card-subtitle {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    ion-card-title {
+      font-weight: bold;
+      font-size: 5rem;
+    }
+  }
+
+  ion-card-content {
+    padding: 0.2rem;
+  }
+}
+
+ion-toolbar {
+  ion-segment {
+    ion-segment-button {
+      font-size: 0.5rem;
+      padding-bottom: 0.3rem;
+    }
+  }
+}
+
+ion-col {
+  padding: 0;
+}
+
+ion-content {
+  // overwrite inline styles
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
