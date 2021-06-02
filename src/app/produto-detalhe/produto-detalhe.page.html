@@ -1,9 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>produto-detalhe</ion-title>
+  <ion-toolbar color="principal">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>iLook</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="light">
+  <ion-card *ngIf="produto">
+    <ion-card-header>
+      <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <img *ngFor="let imagem of produto.imgProducts; first as isFirst; index as i" src="{{imagem.pathFile+'/'+imagem.nameFile}}" />
+    </ion-card-header>
+    <ion-card-content>
+      <h1 color="principal">
+        {{produto.nameProducts}} <br />
+        <ion-chip color="success" slot="end">
+          {{produto.pSaleProducts | currency: 'BRL'}}
+        </ion-chip>
+      </h1>
+      <ion-card-subtitle>
+        {{produto.preDescProducts}}
+      </ion-card-subtitle>
 
+      <p>
+        {{produto.descProducts}}
+      </p>
+      <ion-button shape="round" fill="outline" color="principal" size="small" expand="full">
+        <ion-icon name="add-circle-outline">add</ion-icon>
+        Add ao carrinho
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
