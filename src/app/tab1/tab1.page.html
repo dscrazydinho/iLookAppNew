@@ -4,11 +4,11 @@
       <ion-button>
         <ion-icon name="notifications-outline"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="cart-outline"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon name="person-outline"></ion-icon>
+      <ion-button slot="end" (click)="openCart()">
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+        <ion-badge *ngIf="cartItemCount | async" color="success" style="position: absolute; right: -5px; top: -3px;">
+          {{ cartItemCount | async }}
+        </ion-badge>
       </ion-button>
     </ion-buttons>
     <ion-title slot="start">iLook</ion-title>
@@ -46,13 +46,13 @@
       <!--**********PRODUTOS**********-->
       <ion-col size="6" *ngFor="let produto of listaProdutosAPI">
         <ion-card *ngFor="let imagem of produto.imgProducts; first as isFirst; index as i">
-          <img *ngIf="isFirst" src="{{imagem.pathFile+'/'+imagem.nameFile}}" (click)="exibeDetalheProduto(produto)"/>
+          <img *ngIf="isFirst" src="{{imagem.pathFile+'/'+imagem.nameFile}}" (click)="exibeDetalheProduto(produto)" />
           <ion-card-header>
             <ion-card-subtitle>{{produto.pSaleProducts | currency: 'BRL'}}</ion-card-subtitle>
             <ion-card-title>{{produto.nameProducts}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-button shape="round" fill="outline" color="principal" size="small">
+            <ion-button shape="round" fill="outline" color="principal" size="small" (click)="addAoCarrinho(produto)">
               <ion-icon name="add-circle-outline">add</ion-icon>
             </ion-button>
           </ion-card-content>

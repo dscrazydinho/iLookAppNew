@@ -12,6 +12,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { ProductService } from './services/product.service';
 import { DadosService } from './services/dados.service';
+import { CartService } from './services/cart.service';
 
 registerLocaleData(localePt);
 
@@ -28,7 +29,8 @@ registerLocaleData(localePt);
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     ProductService,
-    DadosService
+    DadosService,
+    CartService
   ],
   bootstrap: [AppComponent],
 })

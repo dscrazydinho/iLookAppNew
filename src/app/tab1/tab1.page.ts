@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
+import { ICart } from '../models/ICart.models';
 import { IProduct } from '../models/IProduct.models';
+import { CartService } from '../services/cart.service';
 import { DadosService } from '../services/dados.service';
 import { ProductService } from '../services/product.service';
 
@@ -13,6 +16,8 @@ import { ProductService } from '../services/product.service';
 export class Tab1Page implements OnInit {
 
   listaProdutosAPI: IProduct;
+  cart: ICart;
+  cartItemCount: BehaviorSubject<number>;
 
   private filtroSelecionado = 'all';
 
@@ -21,6 +26,7 @@ export class Tab1Page implements OnInit {
     public toastController: ToastController,
     public productService: ProductService,
     public dadosService: DadosService,
+    public cartService: CartService,
     public route: Router) { }
 
   exibeDetalheProduto(produto: IProduct){
@@ -37,6 +43,11 @@ export class Tab1Page implements OnInit {
         this.listaProdutosAPI = dados;
       });
     }
+  }
+
+  addAoCarrinho(produto: IProduct){
+    this.cartService.addToCart(produto);
+    this.msg('Produto adicionado');
   }
 
   filtroChange(event) {
@@ -65,10 +76,23 @@ export class Tab1Page implements OnInit {
     }
   }
 
+  async msg(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      color: 'success',
+      position: 'middle'
+    });
+    toast.present();
+    return null;
+  }
+
   ngOnInit() {
     this.productService.getProdutosTodos().subscribe(resposta => {
       this.listaProdutosAPI = resposta;
     });
+    this.cart = this.cartService.getCart();
+    this.cartItemCount = this.cartService.getCartItemCount();
   }
 
 }
