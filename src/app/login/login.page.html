@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true" color="light">
+  <div class="center">
+    <ion-card>
+      <img src="assets/ilook.png" alt="logo" />
+      <ion-card-title class="ion-text-center" color="principal">iLook</ion-card-title>
+      <ion-item>
+        <ion-label position="floating" color="principal">E-mail</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="principal">Senha:</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" color="principal">Entrar</ion-button>
+      <ion-toolbar>
+        <ion-buttons collapse="true">
+          <ion-button color="principal" size="small" fill="clear" (click)="cadPage()">Cadastrar</ion-button>
+          <ion-button color="principal" size="small" fill="clear">Esqueci a senha</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-card>
+
+
+  </div>
+</ion-content>

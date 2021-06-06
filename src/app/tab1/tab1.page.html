@@ -4,7 +4,7 @@
       <ion-button>
         <ion-icon name="notifications-outline"></ion-icon>
       </ion-button>
-      <ion-button slot="end" (click)="openCart()">
+      <ion-button slot="end" (click)="exibeCarrinho()">
         <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
         <ion-badge *ngIf="cartItemCount | async" color="success" style="position: absolute; right: -5px; top: -3px;">
           {{ cartItemCount | async }}
@@ -14,14 +14,14 @@
     <ion-title slot="start">iLook</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true" color="light">
+<ion-content [fullscreen]="true" color="light" (ionScrollEnd)="logScrollEnd()">
 
   <!--**********SEARCHBAR**********-->
   <ion-searchbar (ionChange)="buscarProduto($event)" placeholder="Buscar"></ion-searchbar>
   <!--**********SEARCHBAR**********-->
 
   <!--**********CATEGORIAS**********-->
-  <ion-toolbar color="principal">
+  <ion-toolbar color="principal" expand="full">
     <ion-segment value="all" [(ngModel)]="filtroSelecionado" (ionChange)="filtroChange($event)">
       <ion-segment-button value="all">
         <ion-icon name="bag-outline"></ion-icon>

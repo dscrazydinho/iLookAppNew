@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ICart, ICartItens } from '../models/ICart.models';
 import { IProduct } from '../models/IProduct.models';
 import { BehaviorSubject } from 'rxjs';
+import { IonCardTitle } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
 
   private cart: ICart = { itensSales: [] };
-  private cartItem: ICartItens = { qtdSalesItem: 0, priceSalesItem: 0 };
+  private cartItem: ICartItens = {};
   private cartItemCount = new BehaviorSubject(0);
 
   constructor() { }
@@ -32,10 +33,11 @@ export class CartService {
       }
     }
     if (!added) {
-      this.cartItem.qtdSalesItem = 1;
-      this.cartItem.priceSalesItem = produto.pSaleProducts;
-      this.cartItem.productSalesItem = produto;
-      this.cart.itensSales.push(this.cartItem);
+      this.cart.itensSales.push({
+        qtdSalesItem: 1,
+        priceSalesItem: produto.pSaleProducts,
+        productSalesItem: produto,
+      });
     }
     this.cartItemCount.next(this.cartItemCount.value + 1);
   };

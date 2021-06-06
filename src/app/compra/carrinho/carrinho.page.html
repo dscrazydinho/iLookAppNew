@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="principal">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>iLook</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-list-header>
+      <ion-label>Produtos no carrinho</ion-label>
+    </ion-list-header>
+
+    <ion-item lines="full" *ngFor="let item of cart.itensSales">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" align-self-end>
+            <img *ngFor="let imagem of item.productSalesItem.imgProducts"
+              src="{{imagem.pathFile+'/'+imagem.nameFile}}" />
+          </ion-col>
+          <ion-col size="8">
+            <ion-row>
+              <h3 color="principal">{{item.productSalesItem.nameProducts}}</h3>
+            </ion-row>
+            <ion-row>
+              <ion-tabs>
+                <ion-buttons>
+                  <ion-button color="principal" clear (click)="decreaseCartItem(item.productSalesItem)">
+                    <ion-icon name="remove-circle"></ion-icon>
+                  </ion-button>
+                  {{ item.qtdSalesItem }}
+                  <ion-button color="principal" clear (click)="increaseCartItem(item.productSalesItem)">
+                    <ion-icon name="add-circle"></ion-icon>
+                  </ion-button>
+                  <ion-button slot="end" color="principal" (click)="removeCartItem(item.productSalesItem)">
+                    <ion-icon name="close-circle"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-tabs>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" color="principal" (click)="finalizar()">Finalizar compra</ion-button>
+</ion-content>

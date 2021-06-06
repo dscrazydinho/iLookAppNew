@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="principal">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>iLook</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">E-mail:</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">Senha:</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">Nome:</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">Data de Nasc:</ion-label>
+        <ion-input type="date" placeholder=""></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">RG:</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">CPF:</ion-label>
+        <ion-input simpleMask="999.999.999-99" [clearIfNotMatch]="true"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">Telefone:</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="principal">Celular:</ion-label>
+        <ion-input type="text" mask="000"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" fill="solid" color="principal">Cadastrar</ion-button>
+
+    </ion-list>
+
+
+</ion-content>

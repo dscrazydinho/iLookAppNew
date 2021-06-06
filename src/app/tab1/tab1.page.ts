@@ -29,9 +29,17 @@ export class Tab1Page implements OnInit {
     public cartService: CartService,
     public route: Router) { }
 
-  exibeDetalheProduto(produto: IProduct){
+  logScrollEnd() {
+
+  }
+
+  exibeDetalheProduto(produto: IProduct) {
     this.dadosService.guardarDados('produto', produto);
     this.route.navigateByUrl('/produto-detalhe');
+  }
+
+  exibeCarrinho() {
+    this.route.navigateByUrl('/carrinho');
   }
 
   buscarProduto(evento: any) {
@@ -45,7 +53,7 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  addAoCarrinho(produto: IProduct){
+  addAoCarrinho(produto: IProduct) {
     this.cartService.addToCart(produto);
     this.msg('Produto adicionado');
   }

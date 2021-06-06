@@ -11,8 +11,32 @@ const routes: Routes = [
     loadChildren: () => import('./produto-detalhe/produto-detalhe.module').then( m => m.ProdutoDetalhePageModule)
   },
   {
-    path: 'cadastro-usuario',
-    loadChildren: () => import('./cadastro-usuario/cadastro-usuario.module').then( m => m.CadastroUsuarioPageModule)
+    path: 'carrinho',
+    loadChildren: () => import('./compra/carrinho/carrinho.module').then( m => m.CarrinhoPageModule)
+  },
+  {
+    path: 'finalizar',
+    loadChildren: () => import('./compra/finalizar/finalizar.module').then( m => m.FinalizarPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'cadEnd',
+    loadChildren: () => import('./endereco/cad/cad.module').then( m => m.CadPageModule)
+  },
+  {
+    path: 'listEnd',
+    loadChildren: () => import('./endereco/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'cadUser',
+    loadChildren: () => import('./usuario/cad/cad.module').then( m => m.CadPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./usuario/perfil/perfil.module').then( m => m.PerfilPageModule)
   }
 ];
 @NgModule({

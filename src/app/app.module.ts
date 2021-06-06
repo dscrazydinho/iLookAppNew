@@ -17,7 +17,9 @@ import { CartService } from './services/cart.service';
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,
