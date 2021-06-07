@@ -11,3 +11,12 @@
   font-size: 0.8rem;
   align-items: center;
 }
+
+.validation-errors{
+  .error-message{
+    color: red;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+}

@@ -3,16 +3,37 @@
     <ion-card>
       <img src="assets/ilook.png" alt="logo" />
       <ion-card-title class="ion-text-center" color="principal">iLook</ion-card-title>
-      <ion-item>
-        <ion-label position="floating" color="principal">E-mail</ion-label>
-        <ion-input type="email" [(ngModel)]="login.username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" color="principal">Senha:</ion-label>
-        <ion-input type="password" [(ngModel)]="login.password"></ion-input>
-      </ion-item>
 
-      <ion-button expand="full" color="principal" (click)="fazerLogin()">Entrar</ion-button>
+      <form [formGroup]="loginForm">
+        <ion-item>
+          <ion-label position="floating" color="principal">E-mail</ion-label>
+          <ion-input type="email" formControlName="username"></ion-input>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of msgErroValid.username">
+              <div class="error-message" *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="principal">Senha:</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of msgErroValid.password">
+              <div class="error-message" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+        </ion-item>
+      </form>
+
+      <ion-button expand="full" color="principal" (click)="fazerLogin()" [disabled]="!loginForm.valid">Entrar</ion-button>
       <ion-toolbar>
         <ion-buttons collapse="true">
           <ion-button color="principal" size="small" fill="clear" (click)="cadPage()">Cadastrar</ion-button>

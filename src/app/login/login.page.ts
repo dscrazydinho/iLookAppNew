@@ -1,8 +1,9 @@
-import { core } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ILogin } from '../models/IUser.models';
+import { UserService } from '../services/users/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,25 +14,62 @@ export class LoginPage implements OnInit {
 
   private login: ILogin = {};
 
+  private token = null;
+
+  private msgErroValid = {
+    username: [
+      { type: 'required', message: 'Email é obrigatório!' },
+      { type: 'email', message: 'Digite um e-mail válido!' }
+    ],
+    password: [
+      { type: 'required', message: 'Senha é obrigatório!' },
+      { type: 'minlength', message: 'Senha muito curta!' },
+      { type: 'maxlength', message: 'Senha muito Longa!' }
+    ]
+  };
+
+
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public loginForm: FormGroup;
+
   constructor(
     public toastController: ToastController,
-    private route: Router
-  ) { }
+    private route: Router,
+    public fBuilder: FormBuilder,
+    public userService: UserService
+  ) {
+    this.loginForm = this.fBuilder.group({
+      username: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(25)
+      ]))
+    });
+  }
 
   cadPage() {
     this.route.navigateByUrl('cadUser');
   }
-  voltar(){
+  voltar() {
     this.route.navigateByUrl('/');
   }
 
-  fazerLogin(){
-    console.log(this.login);
-    this.presentToast('Login Realizado', 'success');
-    this.route.navigateByUrl('/');
+  fazerLogin() {
+    console.log(this.loginForm.value);
+    this.userService.postLogin(this.loginForm.value).subscribe((resposta) => {
+      this.token = resposta;
+      console.log(this.token);
+    });
+    //this.presentToast('Login Realizado', 'success');
+    //this.route.navigateByUrl('/');
   }
 
-  async presentToast(msg: string, cor: string){
+  async presentToast(msg: string, cor: string) {
     const toast = await this.toastController.create({
       message: msg,
       color: cor,
