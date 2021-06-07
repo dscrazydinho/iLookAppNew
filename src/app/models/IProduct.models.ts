@@ -6,7 +6,7 @@ export interface IProduct {
   nameProducts?: string;
   typeProducts?: string;
   saldoProducts?: number;
-  pCostProducts?: string;
+  pCostProducts?: number;
   pSaleProducts?: number;
   preDescProducts?: string;
   descProducts?: string;

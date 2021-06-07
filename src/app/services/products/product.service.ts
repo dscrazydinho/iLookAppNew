@@ -4,7 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { Observable } from 'rxjs';
 import { ToastController } from '@ionic/angular';
-import { IProduct } from '../models/IProduct.models';
+import { IProduct } from 'src/app/models/IProduct.models';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,8 @@ export class ProductService {
 
   async exibirErro(erro) {
     const toast = await this.toastController.create({
-      message: 'Erro ao consultar a API',
+      header: 'Erro ao consultar a API',
+      message: erro,
       duration: 2000,
       color: 'danger',
       position: 'middle'

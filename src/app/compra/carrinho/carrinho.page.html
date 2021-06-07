@@ -11,8 +11,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
 
+  <ion-card class="noSearch" *ngIf="!(cartItemCount | async)">
+    <img src="" />
+    <ion-card-header>
+      <ion-card-title color="principal">
+        <ion-icon name="cart-outline" color="light"></ion-icon>
+      </ion-card-title>
+      <ion-card-subtitle>
+        Seu carrinho está vaziu!
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Adicione produtos para poder comprá-los
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-list *ngIf="cartItemCount | async">
+    <ion-button expand="full" shape="round" fill="outline" color="principal" (click)="limpar()">Limpar Carrinho</ion-button>
     <ion-list-header>
       <ion-label>Produtos no carrinho</ion-label>
     </ion-list-header>
@@ -48,6 +65,6 @@
         </ion-row>
       </ion-grid>
     </ion-item>
+    <ion-button expand="full" shape="round" fill="outline" color="principal" (click)="finalizar()">Finalizar compra</ion-button>
   </ion-list>
-  <ion-button expand="full" color="principal" (click)="finalizar()">Finalizar compra</ion-button>
 </ion-content>

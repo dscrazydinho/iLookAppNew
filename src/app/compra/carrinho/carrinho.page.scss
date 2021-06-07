@@ -11,3 +11,40 @@ ion-item {
     text-align: center;
   }
 }
+
+.noSearch {
+  text-align: center;
+
+  ion-card-header {
+    padding: 0.2rem;
+
+    ion-card-subtitle {
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    ion-card-title {
+      font-weight: bold;
+      font-size: 5rem;
+
+    }
+  }
+
+  ion-card-content {
+    padding: 0.2rem;
+    font-size: 0.6rem;
+  }
+}
+
+ion-content {
+  // overwrite inline styles
+  --offset-bottom: auto !important;
+  --overflow: hidden;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  background-color:#f4f5f8;
+}
+

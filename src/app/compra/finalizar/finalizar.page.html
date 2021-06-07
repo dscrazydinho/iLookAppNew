@@ -12,32 +12,56 @@
 
 <ion-content>
   <ion-list>
-    <ion-radio-group value="biff" (ionChange)="exibeCartao($event)">
+    <ion-item>
+      <ion-label color="principal">Método de Pagamento:</ion-label>
+      <ion-select value="" color="principal" okText="ok" cancelText="cancelar" (ionChange)="exibeCartao($event)" [(ngModel)]="cart.paymentSales">
+        <ion-select-option value="boleto">Boleto</ion-select-option>
+        <ion-select-option value="cartao">Cartão</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="hidden">
+    <ion-item>
+      <ion-label position="floating" color="principal">Número:</ion-label>
+      <ion-input type="text" [(ngModel)]="card.numero"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="principal">CVC:</ion-label>
+      <ion-input type="text" [(ngModel)]="card.cvc"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="principal">Validade:</ion-label>
+      <ion-input type="date" [(ngModel)]="card.validade" placeholder=""></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="cart.deliveryEnds">
       <ion-list-header>
-        <ion-label>Método de Pagamento:</ion-label>
+        <ion-label color="principal">Endereço de entrega:</ion-label>
       </ion-list-header>
 
       <ion-item>
-        <ion-label>Boleto</ion-label>
-        <ion-radio slot="start" value="boleto"></ion-radio>
+        <ion-label color="principal">End1</ion-label>
+        <ion-radio slot="start" value="end1"></ion-radio>
       </ion-item>
 
       <ion-item>
-        <ion-label>Cartão:</ion-label>
-        <ion-radio slot="start" value="cartao"></ion-radio>
+        <ion-label color="principal">End2</ion-label>
+        <ion-radio slot="start" value="end2"></ion-radio>
       </ion-item>
     </ion-radio-group>
   </ion-list>
 
- <ion-list *ngIf="hidden">
   <ion-item>
-    <ion-label position="floating" color="principal">{{hidden}} Obs:</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label color="principal" position="floating">Obs:</ion-label>
+    <ion-textarea [(ngModel)]="cart.obsSales" placeholder="Se necessário, digite aqui informações extras..."></ion-textarea>
   </ion-item>
-  <ion-item>
-    <ion-label position="floating" color="principal">Obs:</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
- </ion-list>
 
+  <ion-item>
+    <p>Valor total da Compra: {{cart.valueSales | currency: 'BRL'}}</p>
+  </ion-item>
+
+  <ion-button expand="full" shape="round" fill="outline" color="principal" (click)="comprar()">Comprar</ion-button>
 </ion-content>

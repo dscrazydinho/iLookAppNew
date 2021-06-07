@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../models/IProduct.models';
-import { DadosService } from '../services/dados.service';
+import { DadosService } from '../services/dadosGeral/dados.service';
+
 
 @Component({
   selector: 'app-produto-detalhe',

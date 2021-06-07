@@ -1,5 +1,7 @@
 {
   "name": "iLook",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

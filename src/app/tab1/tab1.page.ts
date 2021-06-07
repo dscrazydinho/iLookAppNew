@@ -4,9 +4,10 @@ import { AlertController, ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { ICart } from '../models/ICart.models';
 import { IProduct } from '../models/IProduct.models';
-import { CartService } from '../services/cart.service';
-import { DadosService } from '../services/dados.service';
-import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart/cart.service';
+import { DadosService } from '../services/dadosGeral/dados.service';
+import { ProductService } from '../services/products/product.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -87,9 +88,9 @@ export class Tab1Page implements OnInit {
   async msg(msg: string) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 2000,
+      duration: 1500,
       color: 'success',
-      position: 'middle'
+      position: 'bottom'
     });
     toast.present();
     return null;
