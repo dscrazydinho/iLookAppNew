@@ -12,8 +12,6 @@ import { UserService } from '../services/users/user.service';
 })
 export class LoginPage implements OnInit {
 
-  private login: ILogin = {};
-
   private token = null;
 
   private msgErroValid = {
@@ -42,12 +40,12 @@ export class LoginPage implements OnInit {
     this.loginForm = this.fBuilder.group({
       username: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.email
+        /*Validators.email*/
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(25)
+       /* Validators.minLength(8),
+        Validators.maxLength(25)*/
       ]))
     });
   }
@@ -60,13 +58,17 @@ export class LoginPage implements OnInit {
   }
 
   fazerLogin() {
-    console.log(this.loginForm.value);
     this.userService.postLogin(this.loginForm.value).subscribe((resposta) => {
       this.token = resposta;
-      console.log(this.token);
+      if (this.token) {
+        localStorage.setItem('token', this.token);
+        localStorage.setItem('user', this.loginForm.value.username);
+        this.presentToast('Login Realizado', 'success');
+        this.route.navigateByUrl('/');
+      } else {
+        this.presentToast('Usuario e/ou senha incorretos', 'danger');
+      }
     });
-    //this.presentToast('Login Realizado', 'success');
-    //this.route.navigateByUrl('/');
   }
 
   async presentToast(msg: string, cor: string) {

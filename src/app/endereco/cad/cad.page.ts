@@ -17,7 +17,9 @@ export class CadPage implements OnInit {
     private endService: EndDeliveryService,
     public toastController: ToastController,
     private router: Router
-  ) { }
+  ) {
+    this.validaLogin();
+  }
 
   cadastrar() {
     if (
@@ -34,6 +36,12 @@ export class CadPage implements OnInit {
       console.log(this.end);
       this.exibirResult('Endereços de entrega atualizados!', 'success');
       this.router.navigateByUrl('/');
+    }
+  }
+
+  validaLogin() {
+    if (localStorage.getItem('token') === null) {
+      this.router.navigateByUrl('/login');
     }
   }
 

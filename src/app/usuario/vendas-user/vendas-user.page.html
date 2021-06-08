@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="principal">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>iLook</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Vendas Realizadas</ion-card-title>
+    </ion-card-header>
+
+    <ion-list *ngFor="let v of vendas">
+      <ion-item *ngIf="v.userSales.idUsers === usuarioLogado.idUsers">
+        <ion-card-content>
+          <p>id: {{v.idSales}} - valor: {{v.valueSales}}</p>
+          <p>Pagto: {{v.paymentSales}}</p>
+          <p>Endereço de entrega: </p>
+          <p>Rua: {{v.deliveryEnds.streetEndereco}} - nº {{v.deliveryEnds.numberEndereco}}</p>
+        </ion-card-content>
+      </ion-item>
+    </ion-list>
+
+
+
+  </ion-card>
+
+</ion-content>

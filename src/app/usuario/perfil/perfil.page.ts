@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilPage implements OnInit {
 
-  constructor() { }
+  constructor(public route: Router) {
+    this.validaLogin();
+  }
+
+  validaLogin() {
+    if (localStorage.getItem('token') === null) {
+      this.route.navigateByUrl('/login');
+    }
+  }
 
   ngOnInit() {
   }

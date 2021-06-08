@@ -3,32 +3,23 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ILogin, IUser } from 'src/app/models/IUser.models';
+import { ICart } from 'src/app/models/ICart.models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class VendaService {
 
-  private apiURL = 'http://ilook-env.eba-y7ikrzce.sa-east-1.elasticbeanstalk.com/api/usuarios/';
-
-  private apiUrlTeste = 'https://reqres.in/api/';
+  private apiURL = 'http://ilook-env.eba-y7ikrzce.sa-east-1.elasticbeanstalk.com/api/vendas/';
 
   constructor(
     private http: HttpClient,
-    public toastController: ToastController) { }
+    public toastController: ToastController
+  ) { }
 
-  postLogin(login: ILogin): any {
-    const url = `${this.apiURL}login`;
-    return this.http.post(url, login).pipe(
-      map(retorno => retorno),
-      catchError(erro => this.exibirErro(erro))
-    );
-  }
-
-  getUser(busca: string): Observable<IUser>{
-    const url = `${this.apiURL}${busca}`;
-    return this.http.get<IUser>(url).pipe(
+  getVendas(): Observable<ICart>{
+    const url = `${this.apiURL}todos`;
+    return this.http.get<ICart>(url).pipe(
       map(retorno => retorno),
       catchError(erro => this.exibirErro(erro))
     );

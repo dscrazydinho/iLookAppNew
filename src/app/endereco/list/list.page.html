@@ -11,11 +11,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-button expand="full" shape="round" fill="outline" color="principal" (click)="cadEnd()">Editar Endereços</ion-button>
+  <ion-button expand="full" shape="round" fill="outline" color="principal" (click)="cadEnd()">Editar Endereços
+  </ion-button>
   <h2>Endereços de Entrega cadastrados</h2>
-  <ion-list padding>
-    <ion-item lines="full">
-      Rua teste teste teste teste
+  <ion-list padding *ngIf="usuarioLogado">
+    <ion-item lines="full" *ngFor="let e of usuarioLogado.endsUsers">
+      <p>Rua: {{e.streetEndereco}}</p>
+      <p>nº: {{e.numberEndereco}}</p>
+
     </ion-item>
   </ion-list>
 

@@ -5,7 +5,9 @@ import { BehaviorSubject } from 'rxjs';
 import { isEmpty } from 'rxjs/operators';
 import { ICard } from 'src/app/models/ICard.model';
 import { ICart } from 'src/app/models/ICart.models';
+import { IUser } from 'src/app/models/IUser.models';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { UserService } from 'src/app/services/users/user.service';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class FinalizarPage implements OnInit {
 
   public hidden = false;
   public totalItem: number;
+  public usuarioLogado: IUser = {};
 
   cart: ICart = {};
   cartItemCount: BehaviorSubject<number>;
@@ -25,8 +28,11 @@ export class FinalizarPage implements OnInit {
   constructor(
     private cartService: CartService,
     public toastController: ToastController,
+    public usuarioService: UserService,
     private router: Router
-  ) { }
+  ) {
+    this.validaLogin();
+  }
 
   ngOnInit() {
     this.cart = this.cartService.getCart();
@@ -37,7 +43,7 @@ export class FinalizarPage implements OnInit {
 
   exibeCartao(event) {
     console.log(event.target.value);
-    if (event.target.value === 'cartao') {
+    if (event.target.value === 'CREDITO' || event.target.value === 'DEBITO') {
       this.hidden = true;
       console.log(this.hidden);
     } else {
@@ -47,7 +53,7 @@ export class FinalizarPage implements OnInit {
 
   comprar() {
     if (this.cart.deliveryEnds === undefined || this.cart.paymentSales === undefined) {
-      this.exibirResult('Você precisa escolher um método de pagamento e um endereço de entrega', 'danger');
+      this.exibirResult('Você precisa escolher um método de pagamento e um endereço de entrega, se não tiver um endereco, cadastre um no menu', 'danger');
     } else if (this.cart.paymentSales === 'cartao' && (this.card.cvc === 0 || this.card.numero === 0 || this.card.validade === undefined)) {
       this.exibirResult('Você precisa digitar um cartão válido', 'danger');
     } else {
@@ -65,6 +71,16 @@ export class FinalizarPage implements OnInit {
       this.cart.valueSales = this.cart.valueSales + this.totalItem;
     }
     return this.cart.valueSales;
+  }
+
+  validaLogin() {
+    if (localStorage.getItem('token') === null) {
+      this.router.navigateByUrl('/login');
+    } else {
+      this.usuarioService.getUser(localStorage.getItem('user')).subscribe(resposta => {
+        this.usuarioLogado = resposta;
+      });
+    }
   }
 
   async exibirResult(msg: string, cor: string) {
